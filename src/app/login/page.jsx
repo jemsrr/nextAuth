@@ -22,7 +22,6 @@ const Login = () => {
 
     try {
       const res = await axios.post("api/user/login", data);
-      console.log(data);
       setData(defaultData);
 
       if (res.status === 200) {

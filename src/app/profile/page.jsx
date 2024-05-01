@@ -1,9 +1,23 @@
 "use client";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Profile = () => {
-  
+  const router = useRouter();
+  const onLogout = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.get("api/user/logout");
+
+      if (res.status === 200) {
+        router.push("/login");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -14,7 +28,6 @@ const Profile = () => {
       </div>
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <form className="space-y-6" action="#" method="POST">
-         
           <div>
             <button
               type="submit"
@@ -25,7 +38,6 @@ const Profile = () => {
             </button>
           </div>
         </form>
-       
       </div>
     </div>
   );
